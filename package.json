@@ -4,6 +4,7 @@
   "description": "Nattavat Viengthong 56660003  \r Thanakorn Ngamsamer 56660124  \r Adisak Wongkingsri 56660202",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "git-package-json": "^1.4.7",
     "git-rest-api": "^0.2.8"
