@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Nattavat Viengthong 56660003  \r Thanakorn Ngamsamer 56660124  \r Adisak Wongkingsri 56660202",
+  "main": "index.js",
+  "dependencies": {
+    "git-package-json": "^1.4.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feark702/Webtech-Api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/feark702/Webtech-Api/issues"
+  },
+  "homepage": "https://github.com/feark702/Webtech-Api#readme"
+}
