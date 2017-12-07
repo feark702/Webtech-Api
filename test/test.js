@@ -1,2 +1,2 @@
 const server = require('./server')
-server.listen(3000, () => console.log('Hello hihi'))
+server.listen(8888, () => console.log('Hi!!'))
