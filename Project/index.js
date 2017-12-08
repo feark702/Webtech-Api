@@ -1,11 +1,12 @@
 const express = require('express')
 const contacts = express.Router();
 
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
+function IsNullOrWhiteSpace(str) {
+        if (str == null) return true;
+        return str.replace(/\s/g, '').length == 0;
+    }
 
-var contact1 = [
+var contact = [
     {
         id:1,
         First_Name:'Adisak',
@@ -25,5 +26,17 @@ var contact1 = [
         email: '56660124@go.buu.ac.th'
     }
 ]
+
+contacts.post('/contacts',(req,res) => {
+    let list = req.body
+    let text = []
+    if(!IsNullOrWhiteSpace(list.First_Name) && (!IsNullOrWhiteSpace(list.email))){
+        contact1.push(list)
+        res.json("เพิ่มข้อมูลสำเร็จ")
+    }
+    else{
+        res.send("FirstName And Email isEmptry.")
+    }
+})
 
 module.exports = contacts
