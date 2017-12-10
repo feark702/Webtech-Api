@@ -1,2 +1,2 @@
-const server = require('./server')
-server.listen(8888, () => console.log('Server Already!!'))
+const Server = require('./server')
+Server.listen(3000, () => console.log('Server Already!!'))
