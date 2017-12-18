@@ -30,30 +30,31 @@ var Contact = [
     }
 ]
 
-contacts.get('/contacts/:name', (req, res) => {
-    let name = req.params.name;
-    for (let i = 0; i < Contact.length; i++) {
-        if( name == Contact[i].First_Name){
-            res.json(Contact[i])
-        } 
-    }
-})
-
+//get contacts
 contacts.get('/contacts',(req,res) => {
     res.json(Contact)
 }
 )
 
+
+//search and get by id
 contacts.get('/contacts/:id', (req, res) => {
     let id = req.params.id;
-    for(let i = 0; i < Contact.length; i++) {
-        if( id == Contact[i].id){
-            res.json(Contact[i])
+    let count = 0;
+    for(let i=0;i<Contact.length;i++){
+        if(id == Contact[i].First_Name)
+        {
+          res.json(Contact[i])
+          count++;
         }
     }
+    if(count == 0){
+     res.json(Contact[id-1])
+    }
+    
 })
 
-
+//put contacts by id
 contacts.put('/contacts/:id',(req,res) =>{
     let contactId = req.params.id;
     
@@ -76,10 +77,7 @@ contacts.put('/contacts/:id',(req,res) =>{
 })
 
 
-
-
-
-
+//post contacts
 contacts.post('/contacts',(req,res) => {
     const list = {
                 id: Contact.length+1,
@@ -99,8 +97,7 @@ contacts.post('/contacts',(req,res) => {
 }
 })
 
-
-
+//delete by id
 contacts.delete('/contacts/:id',(req,res) =>{
     let Contact_Id = req.params.id;
     
@@ -117,7 +114,7 @@ contacts.delete('/contacts/:id',(req,res) =>{
 })
 
 
-
+//delete by name
 contacts.delete('/contacts/:First_Name',(req,res) =>{
     let First_Name= req.params.First_Name
     for(let i=0;i<Contact.length;i++)
