@@ -1,5 +1,6 @@
 const express = require('express')
 const contacts = express.Router();
+const bodyParser = require('body-parser')
 
 
 
@@ -28,35 +29,29 @@ var Contact = [
         email: '56660124@go.buu.ac.th'
     }
 ]
-contacts.get('/contacts',(req,res) => res.json(Contact))
+
+contacts.get('/contacts/:name', (req, res) => {
+    let name = req.params.name;
+    for (let i = 0; i < Contact.length; i++) {
+        if( name == Contact[i].First_Name){
+            res.json(Contact[i])
+        } 
+    }
+})
+
+contacts.get('/contacts',(req,res) => {
+    res.json(Contact)
+}
+)
 
 contacts.get('/contacts/:id', (req, res) => {
-    let id = req.params.id
-    for(let i = 0; i<Contact.length; i++)
-    {
-        if(id == Contact[i].id)
-        {
+    let id = req.params.id;
+    for(let i = 0; i < Contact.length; i++) {
+        if( id == Contact[i].id){
             res.json(Contact[i])
         }
     }
-    })
-
-    contacts.get('/contacts/:First_Name',(req,res) => {
-        if(req.query.First_Name)
-        {
-            for(let i = 0; i<Contact.length; i++)
-            {
-                if(req.query.First_Name == Contact[i].First_Name)
-                {
-                    res.json(Contact[i])
-                }
-            }
-        }
-        else{
-            res.json(Contact)}
-        }
-    )
-
+})
 
 
 contacts.put('/contacts/:id',(req,res) =>{
@@ -86,12 +81,13 @@ contacts.put('/contacts/:id',(req,res) =>{
 
 
 contacts.post('/contacts',(req,res) => {
-    const list = {id: Contact.length+1,
+    const list = {
+                id: Contact.length+1,
                 First_Name: req.body.First_Name,
                 Last_Name: req.body.Last_Name,
-                email : req.body.email}
-    let text = []
-    text.push("ใส่ข้อมูลไม่ครบ.")
+                email : req.body.email
+                 }
+
     if(!IsNullOrWhiteSpace(list.First_Name) && (!IsNullOrWhiteSpace(list.email))){
         
         
@@ -103,12 +99,14 @@ contacts.post('/contacts',(req,res) => {
 }
 })
 
+
+
 contacts.delete('/contacts/:id',(req,res) =>{
     let Contact_Id = req.params.id;
     
     let contact = Contact.filter(contact => {
         return contact.id == Contact_Id;
-      })[0];
+    })[0];
     
       const index = Contact.indexOf(contact);
     
@@ -117,6 +115,8 @@ contacts.delete('/contacts/:id',(req,res) =>{
       res.json({ message: `User ${Contact_Id} deleted.`});
     
 })
+
+
 
 contacts.delete('/contacts/:First_Name',(req,res) =>{
     let First_Name= req.params.First_Name
